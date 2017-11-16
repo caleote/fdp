@@ -3,8 +3,9 @@
 # 51705 Catarina Sofia Esteves Leote
 # 50701 Martim Duarte da Costa Seco
 
+import datetime
 
-def assign_tasks(operators, requests, current_time):
+def assign_tasks(operators, requests, current_time): #Catarina
     """Assign operators to pending requests.
 
     Requires:
@@ -15,4 +16,6 @@ def assign_tasks(operators, requests, current_time):
     Ensures: a list of assignments of operators to requests, according to the conditions indicated
     in the general specification (omitted here for the sake of readability).
     """
-    pass
+    
+    
+    
