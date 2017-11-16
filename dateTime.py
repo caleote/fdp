@@ -38,8 +38,6 @@ def add_minutes(hm, incr): #Catarina
             hours = hours + incrhour
         else:
             incrhour = incrementation // 60
-	    hours = hours + incrhour
-	    minutes = minutes + (incrementation % 60)
-    return hours,':',minutes
-
-print (add_minutes(14:10, 130))
+            hours = hours + incrhour
+            minutes = minutes + (incrementation % 60)
+    return '%s:%s' %(hours, minutes)
