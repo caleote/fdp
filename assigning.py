@@ -1,3 +1,4 @@
+# coding=utf-8
 # 2017-2018 Programação 1 (LTI)
 # Grupo 008
 # 51705 Catarina Sofia Esteves Leote
