@@ -16,3 +16,9 @@ REQ_INDEX_DOMAIN = 2
 
 # Indexes pertaining the operator collection
 OP_INDEX_LANGUAGE = 0
+
+
+# Example Filenames
+REQ_FILENAME = "requests14h55.txt"
+OP_FILENAME = "operators14h55.txt"
+
