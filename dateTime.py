@@ -30,17 +30,16 @@ def add_minutes(hm, incr): #Catarina
     Ensures: str with a time represented as HH:MM, the result of incrementing hm by incr minutes.
     """
     hours = get_hours(hm)
-	minutes = get_minutes(hm)
+    minutes = get_minutes(hm)
     incrementation = minutes + incr
     if incrementation > 60 :
         if incrementation % 60 == 0:
             incrhour = incrementation // 60
             hours = hours + incrhour
-        #else:
-
-
-
-
-        #finalincr = incr % 60
+        else:
+            incrhour = incrementation // 60
+	    hours = hours + incrhour
+	    minutes = minutes + (incrementation % 60)
+    return hours,':',minutes
 
 print (add_minutes(14:10, 130))
