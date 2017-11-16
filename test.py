@@ -1,4 +1,4 @@
-# 2017-2018 Programação 1 (LTI)
+# 2017-2018 Programacao 1 (LTI)
 # Grupo 008
 # 51705 Catarina Sofia Esteves Leote
 # 50701 Martim Duarte da Costa Seco
@@ -16,7 +16,7 @@ def get_minutes(hm): #Catarina
     """
     Get the number of minutes from a HH:MM time representation.
     @requires: hm str with a time represented as HH:MM.
-    ´@ensures: int with the number of minutes.
+    @ensures: int with the number of minutes.
     """
     return int(hm.split(':')[1])
 
