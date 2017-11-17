@@ -26,22 +26,17 @@ def testReading(): #Martim
     print('Reading operators')
     operators = read_operators_file(OP_FILENAME)
     for o in operators:
-        print(o)
+        print(o['name'])
 
 
-
-
-
-def testDateTime(): # Martim
+def testDateTime():  # Martim
     print()
     print('Adding minutes')
     print(add_minutes('14:10', 10))
     print(add_minutes('14:10', 55))
     print(add_minutes('14:10', 90))
-    print(add_minutes('14:10', 24*60-10))
-
+    print(add_minutes('14:10', 24 * 60 - 10))
 
 
 testReading()
-
 testDateTime()
