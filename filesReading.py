@@ -7,7 +7,8 @@
 import constants
 
 def read_operators_file(file_name): # Martim
-    """Read a file with operators into a collection.
+    """
+    Read a file with operators into a collection.
     Requires: file_name, str with the name of a text file with a list of operators.
     Ensures: list, with the requests in the file; each request is a tuple with the various element concerning that request, in the order provided in the file.
     """
@@ -25,8 +26,8 @@ def read_operators_file(file_name): # Martim
 
 
 def read_requests_file(file_name):
-    """Read a file with requests into a collection.
-
+    """
+    Read a file with requests into a collection.
     Requires: file_name, str with the name of a text file with a list of requests.
     Ensures: list, with the requests in the file; each request is a tuple with the various element
     concerning that request, in the order provided in the file.
