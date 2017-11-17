@@ -22,7 +22,7 @@ def get_minutes(hm): #Catarina
     return int(hm.split(':')[1])
 
 
-def add_minutes(hm, incr): #Catarina
+def add_minutes(hm, incr): #Catarina e Martim
     """
     Increment the given time by the given amount of minutes.
     Requires:
@@ -32,13 +32,19 @@ def add_minutes(hm, incr): #Catarina
     """
     hours = get_hours(hm)
     minutes = get_minutes(hm)
-    incrementation = minutes + incr
-    if incrementation > 60 :
-        if incrementation % 60 == 0:
-            incrhour = incrementation // 60
-            hours = hours + incrhour
-        else:
-            incrhour = incrementation // 60
-            hours = hours + incrhour
-            minutes = minutes + (incrementation % 60)
-    return '%s:%s' %(hours, minutes)
+    allminutes = hours*60+minutes
+    allminutes = allminutes + incr
+    return '%02d:%02d' %(int(allminutes/60)%24, allminutes%60)
+
+
+# o de baixo quando adicionavas menos de 60m não funcionava, assim funciona para tudo
+    # incrementation = minutes + incr
+    # if incrementation > 60 :
+    #     if incrementation % 60 == 0:
+    #         incrhour = incrementation // 60
+    #         hours = hours + incrhour
+    #     else:
+    #         incrhour = incrementation // 60
+    #         hours = hours + incrhour
+    #         minutes = minutes + (incrementation % 60)
+    # return '%s:%s' %(hours, minutes)
