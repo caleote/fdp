@@ -35,3 +35,10 @@ def add_minutes(hm, incr): #Catarina e Martim
     allminutes = hours*60+minutes
     allminutes = allminutes + incr
     return '%02d:%02d' % (int(allminutes/60)%24, allminutes%60)
+
+
+# para adicionar datas e horas e minutos e segundos
+# import date
+# import datetime
+# datetime.datetime(2100,2,28,23,50) + datetime.timedelta(minutes=11)
+# conta com tudo, até anos bissextos

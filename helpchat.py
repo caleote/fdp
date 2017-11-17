@@ -31,7 +31,7 @@ def testReadingWriting(): #Martim
     ## fazer alguma coisa
 
     header = ["Ola","Ola"] # Tem que ser o header do ficheiro
-    write_operators_file(operators,header,OUT_OP_FILENAME)
+    write_operators_file(operators, header,OUT_OP_FILENAME)
 
 
 def testDateTime():  # Martim
