@@ -21,6 +21,15 @@ def read_operators_file(file_name): # Martim
         name, language, domains, hourFinish, minutesDone = line.strip().split(', ')
         domains = domains[1:-1].split('; ')
         operators.append((name, language, domains, hourFinish, minutesDone))
+    '''for i in range (len(operators)): #aquela cena nova para depois de almoço vermos ahah
+    operator = list(operators[i])
+    for j in range (1):
+        name = operator[0]
+        language = operator[1]
+        domains = operator[2]
+        hourFinish = operator[3]
+        minutesDone = operator[4]
+    i += 1'''
     in_file.close()
     return operators
 
