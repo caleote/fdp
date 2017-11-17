@@ -20,7 +20,14 @@ def read_operators_file(file_name): # Martim
     for line in in_file:
         name, language, domains, hourFinish, minutesDone = line.strip().split(', ')
         domains = domains[1:-1].split('; ')
-        operators.append((name, language, domains, hourFinish, minutesDone))
+        # É isto que queria catarina ? É uma estrutura de dados, um dicionario
+        operators.append(
+        {'name':name,
+        'language':language,
+        'domains':domains,
+        'hourFinish':hourFinish,
+        'minutesDone':minutesDone
+         })
     in_file.close()
     return operators
 
