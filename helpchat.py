@@ -29,6 +29,9 @@ def testReading(): #Martim
         print(o)
 
 
+
+
+
 def testDateTime(): # Martim
     print()
     print('Adding minutes')
@@ -36,7 +39,6 @@ def testDateTime(): # Martim
     print(add_minutes('14:10', 55))
     print(add_minutes('14:10', 90))
     print(add_minutes('14:10', 24*60-10))
-
 
 
 

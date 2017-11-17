@@ -19,6 +19,7 @@ OP_INDEX_LANGUAGE = 0
 
 
 # Example Filenames
-REQ_FILENAME = "requests14h55.txt"
-OP_FILENAME = "operators14h55.txt"
+REQ_FILENAME = "examples/example1/requests14h55.txt"
+OP_FILENAME = "examples/example1/operators14h55.txt"
+OUT_OP_FILENAME = "operators15h00.txt"
 

@@ -59,7 +59,12 @@ def read_requests_file(file_name):
         name, language, domain, service, duration = line.strip().split(', ')
         duration = int(duration)
         requests.append(
-        {name, language, domain, service, duration))
+        {'name':name,
+         'language':language,
+         'domain':domain,
+         'service':service,
+         'duration':duration
+         })
     in_file.close()
     return requests
 
