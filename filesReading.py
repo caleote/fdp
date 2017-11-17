@@ -21,17 +21,19 @@ def read_operators_file(file_name): # Martim
         name, language, domains, hourFinish, minutesDone = line.strip().split(', ')
         domains = domains[1:-1].split('; ')
         operators.append((name, language, domains, hourFinish, minutesDone))
-    '''for i in range (len(operators)): #aquela cena nova para depois de almoço vermos ahah
-    operator = list(operators[i])
-    for j in range (1):
-        name = operator[0]
-        language = operator[1]
-        domains = operator[2]
-        hourFinish = operator[3]
-        minutesDone = operator[4]
-    i += 1'''
     in_file.close()
     return operators
+
+''' #Isto aqui vai servir para quando precisarmos dos dados do operators só, acho q não tem lógica fazermos aqui a separação por dados
+operators = read_operators_file('xx.txt')
+for i in range (len(operators)):
+    name = operators [i] [0]
+    language = operators [i] [1]
+    domains = operators [i] [2]
+    hourFinish = operators [i] [3]
+    minutesDone = operators [i] [4]
+    i += 1
+ '''
 
 
 def read_requests_file(file_name):
@@ -52,3 +54,14 @@ def read_requests_file(file_name):
         requests.append((name, language, domain, service, duration))
     in_file.close()
     return requests
+
+''' #Isto aqui vai servir para quando precisarmos dos dados do operators só, acho q não tem lógica fazermos aqui a separação por dados
+requests = read_requests_file('xx.txt')
+for i in range (len(requests)):
+    name = requests [i] [0]
+    language = requests [i] [1]
+    domain = requests [i] [2]
+    service = requests [i] [3]
+    duration = requests [i] [4]
+    i += 1
+ '''
