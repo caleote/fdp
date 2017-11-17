@@ -9,10 +9,10 @@ from constants import *
 import assigning
 from dateTime import add_minutes
 from filesReading import *
-import filesWriting
+from filesWriting import *
 
 
-def testReading(): #Martim
+def testReadingWriting(): #Martim
     """
     This function is for testing the read functions
     """
@@ -28,6 +28,11 @@ def testReading(): #Martim
     for o in operators:
         print(o['name'])
 
+    ## fazer alguma coisa
+
+    header = ["Ola","Ola"] # Tem que ser o header do ficheiro
+    write_operators_file(operators,header,OUT_OP_FILENAME)
+
 
 def testDateTime():  # Martim
     print()
@@ -38,5 +43,5 @@ def testDateTime():  # Martim
     print(add_minutes('14:10', 24 * 60 - 10))
 
 
-testReading()
+testReadingWriting()
 testDateTime()

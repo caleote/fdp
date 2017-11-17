@@ -34,4 +34,4 @@ def add_minutes(hm, incr): #Catarina e Martim
     minutes = get_minutes(hm)
     allminutes = hours*60+minutes
     allminutes = allminutes + incr
-    return '%02d:%02d' %(int(allminutes/60)%24, allminutes%60)
+    return '%02d:%02d' % (int(allminutes/60)%24, allminutes%60)
