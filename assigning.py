@@ -4,9 +4,12 @@
 # 51705 Catarina Sofia Esteves Leote
 # 50701 Martim Duarte da Costa Seco
 
-import datetime
+from dateTime import *
 
-def assign_tasks(operators, requests, current_time): #Catarina
+
+
+
+def assign_tasks(operators, requests, current_time): #Catarina Martim
     """Assign operators to pending requests.
 
     Requires:
@@ -17,9 +20,41 @@ def assign_tasks(operators, requests, current_time): #Catarina
     Ensures: a list of assignments of operators to requests, according to the conditions indicated
     in the general specification (omitted here for the sake of readability).
     """
-
-
-
-
-    pass
     
+    #TODO ordenar primium e fremium
+
+    assignments = []
+    for r in requests:
+        #encontrar operador mach
+        o = find_matching_operator(operators, r['language'], r['domain'], current_time)
+
+        if o != None:
+            start_time = max_time(current_time, o['hourFinish'])
+
+            assignment = {'operator' : o['name'], 'client' : r['name'], 'time' : start_time}
+
+        else:
+            assignment = {'operator': 'not-assigned', 'client': r['name'], 'time': current_time}
+
+        assignments.append(assignment)
+    # When all assignments are done :
+    return assignments
+
+
+
+
+#TODO find mach ope
+def find_matching_operator(operators, language, domain, time): # Martim
+    '''
+    TODO preencer
+    :param operators:
+    :param language:
+    :param domain:
+    :param time:
+    :return:
+    '''
+
+
+    return operators[0] #TODO fazer...
+
+
