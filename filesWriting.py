@@ -19,11 +19,11 @@ def write_operators_file(operators, header, file_name): # Martim
     out_file.write('\n')
 
     for o in operators:
-        domains = ('; '.join(o['domains']))
-        domainspar = '(%s)' % domains
-        values = [o['name'],o['language'],domainspar,o['hourFinish'],o['minutesDone']]
-        line = ', '.join(values)
-        out_file.write('%s\n' % line)
+        domains = ('; '.join(o['domains'])) # junta os dominios separados por ;
+        domainspar = '(%s)' % domains # coloca () à volta dos domínios
+        values = [o['name'],o['language'],domainspar,o['hourFinish'],o['minutesDone']] # faz a lista de atributos.
+        line = ', '.join(values) # junta os atributos separados por , numa só linha
+        out_file.write('%s\n' % line) # escreve a linha no ficheiro com ENTER no fim
 
     out_file.close()
 

@@ -4,44 +4,39 @@
 # 51705 Catarina Sofia Esteves Leote
 # 50701 Martim Duarte da Costa Seco
 
-from constants import *
-
 import assigning
-from dateTime import add_minutes
 from filesReading import *
 from filesWriting import *
 
+def main(op_in, req_in, time_out, op_out): # Martim
+    '''
+    this is the main funtions, it read the two input files with the operators and requestes,
+    produces the output files for the timetable and update yhe operators data
+    :param op_in: the filename for the input operators data
+    :param req_in: the filename for the input requests data
+    :param time_out: the filename for the output timetable data
+    :param op_out: the filename for the output operators data
+    :return: nothing
+    Requires:
+        - op_in file contains the operators data sorted by available time and name
+        ......  TODO completar .......
+    Ensures:
+        - The time_out file contains the assignments for the requests in the req_in file
+        - The op_out file contain the operators data updted with the request assignment of file time_out
+    '''
 
-def testReadingWriting(): #Martim
-    """
-    This function is for testing the read functions
-    """
-    print('Reading requests')
-    requests = read_requests_file(REQ_FILENAME)
-    for r in requests:
-        print(r)
+    # Reading the files and checking current time
 
-    print()
+    operators = read_operators_file(op_in)
+    requests = read_requests_file(req_in)
+    current_time = 0    # TODO falta defenir melhor
 
-    print('Reading operators')
-    operators = read_operators_file(OP_FILENAME)
-    for o in operators:
-        print(o['name'])
+    # Assining requests to operators
+    assignments = assigning.assign_tasks(operators, requests, current_time)
 
-    ## fazer alguma coisa
+    # Writing files
+    header=''  # TODO ver o que fazer com o header
+    write_assignments_file(assignments, header, time_out)
+    write_operators_file(operators, header, op_out)
 
-    header = ["Ola","Ola"] # Tem que ser o header do ficheiro
-    write_operators_file(operators, header,OUT_OP_FILENAME)
-
-
-def testDateTime():  # Martim
-    print()
-    print('Adding minutes')
-    print(add_minutes('14:10', 10))
-    print(add_minutes('14:10', 55))
-    print(add_minutes('14:10', 90))
-    print(add_minutes('14:10', 24 * 60 - 10))
-
-
-testReadingWriting()
-testDateTime()
+main('operators14h55.txt','requests14h55.txt','timetable15h00.txt','operators15h00.txt')
