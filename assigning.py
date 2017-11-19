@@ -17,6 +17,9 @@ def assign_tasks(operators, requests, current_time): #Catarina
     Ensures: a list of assignments of operators to requests, according to the conditions indicated
     in the general specification (omitted here for the sake of readability).
     """
-    
-    
+
+
+
+
+    pass
     

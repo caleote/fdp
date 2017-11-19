@@ -26,7 +26,7 @@ def testReadingWriting(): #Martim
     print('Reading operators')
     operators = read_operators_file(OP_FILENAME)
     for o in operators:
-        print(o['name'])
+        print(o)
 
     ## fazer alguma coisa
 
@@ -43,5 +43,29 @@ def testDateTime():  # Martim
     print(add_minutes('14:10', 24 * 60 - 10))
 
 
-testReadingWriting()
-testDateTime()
+def testAssigning():
+    operators = [
+        {'name': 'Ricardo Tavares', 'language': 'portuguese', 'domains': ['mobiles', 'printers'], 'hourFinish': '14:15',
+         'minutesDone': '42'},
+        {'name': 'Carl Thompson', 'language': 'english', 'domains': ['laptops'], 'hourFinish': '14:17',
+         'minutesDone': '54'},
+        {'name': 'NÃºria Castro', 'language': 'spanish', 'domains': ['cameras', 'hifi'], 'hourFinish': '14:24',
+         'minutesDone': '37'},
+        {'name': 'Giovanni Olivetti', 'language': 'italian', 'domains': ['laptops', 'bimby', 'hifi'],
+         'hourFinish': '14:52', 'minutesDone': '21'},
+        {'name': 'Georg Muller', 'language': 'deutsch', 'domains': ['cameras'], 'hourFinish': '15:05',
+         'minutesDone': '31'}
+    ]
+    requests = [
+        {'name': 'Henry Miller', 'language': 'english', 'domain': 'laptops', 'service': 'premium', 'duration': 3},
+        {'name': 'FranÃ§ois Greenwich', 'language': 'spanish', 'domain': 'cameras', 'service': 'premium', 'duration': 6},
+        {'name': 'Ricardo Carvalho', 'language': 'portuguese', 'domain': 'refrigerators', 'service': 'premium',
+         'duration': 2}
+    ]
+    assignments = assigning.assign_tasks(operators,requests,"14:55")
+    print(assignments)
+
+
+#testReadingWriting()
+#testDateTime()
+testAssigning()
