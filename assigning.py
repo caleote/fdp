@@ -54,7 +54,12 @@ def find_matching_operator(operators, language, domain, time): # Martim
     :return:
     '''
 
+    # Ordena-se primeiro... faltam os desempates e a reordenação depois de um update
 
-    return operators[0] #TODO fazer...
+    for o in operators:
+        if o['language'] == language and domain in o['domains']:
+            return o
+
+    return None
 
 

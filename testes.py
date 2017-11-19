@@ -43,29 +43,42 @@ def testDateTime():  # Martim
     print(add_minutes('14:10', 24 * 60 - 10))
 
 
+operators = [
+    {'name': 'Ricardo Tavares', 'language': 'portuguese', 'domains': ['mobiles', 'printers'], 'hourFinish': '14:15',
+     'minutesDone': '42'},
+    {'name': 'Carl Thompson', 'language': 'english', 'domains': ['laptops'], 'hourFinish': '14:17',
+     'minutesDone': '54'},
+    {'name': 'NÃºria Castro', 'language': 'spanish', 'domains': ['cameras', 'hifi'], 'hourFinish': '14:24',
+     'minutesDone': '37'},
+    {'name': 'Giovanni Olivetti', 'language': 'italian', 'domains': ['laptops', 'bimby', 'hifi'],
+     'hourFinish': '14:52', 'minutesDone': '21'},
+    {'name': 'Georg Muller', 'language': 'deutsch', 'domains': ['cameras'], 'hourFinish': '15:05',
+     'minutesDone': '31'}
+]
+requests = [
+    {'name': 'Henry Miller', 'language': 'english', 'domain': 'laptops', 'service': 'premium', 'duration': 3},
+    {'name': 'FranÃ§ois Greenwich', 'language': 'spanish', 'domain': 'cameras', 'service': 'premium', 'duration': 6},
+    {'name': 'Ricardo Carvalho', 'language': 'portuguese', 'domain': 'refrigerators', 'service': 'premium',
+     'duration': 2}
+]
+
 def testAssigning():
-    operators = [
-        {'name': 'Ricardo Tavares', 'language': 'portuguese', 'domains': ['mobiles', 'printers'], 'hourFinish': '14:15',
-         'minutesDone': '42'},
-        {'name': 'Carl Thompson', 'language': 'english', 'domains': ['laptops'], 'hourFinish': '14:17',
-         'minutesDone': '54'},
-        {'name': 'NÃºria Castro', 'language': 'spanish', 'domains': ['cameras', 'hifi'], 'hourFinish': '14:24',
-         'minutesDone': '37'},
-        {'name': 'Giovanni Olivetti', 'language': 'italian', 'domains': ['laptops', 'bimby', 'hifi'],
-         'hourFinish': '14:52', 'minutesDone': '21'},
-        {'name': 'Georg Muller', 'language': 'deutsch', 'domains': ['cameras'], 'hourFinish': '15:05',
-         'minutesDone': '31'}
-    ]
-    requests = [
-        {'name': 'Henry Miller', 'language': 'english', 'domain': 'laptops', 'service': 'premium', 'duration': 3},
-        {'name': 'FranÃ§ois Greenwich', 'language': 'spanish', 'domain': 'cameras', 'service': 'premium', 'duration': 6},
-        {'name': 'Ricardo Carvalho', 'language': 'portuguese', 'domain': 'refrigerators', 'service': 'premium',
-         'duration': 2}
-    ]
-    assignments = assigning.assign_tasks(operators,requests,"14:55")
+    assignments = assigning.assign_tasks(operators, requests, "14:55")
     print(assignments)
 
+def testFindOperator():
+    operator = assigning.find_matching_operator(operators, 'spanish', 'hifi','14:55')
+    print(operator)  # deve ser quem? Núria
+    operator = assigning.find_matching_operator(operators, 'portuguese', 'printers','14:55')
+    print(operator)  # deve ser quem? Ricardo Tavares
+
+def testOrderOperators():
+    pass
+
+def testOrderRequests():
+    pass
 
 #testReadingWriting()
 #testDateTime()
+#testFindOperator()
 testAssigning()
