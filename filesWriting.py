@@ -1,12 +1,12 @@
 # coding=utf-8
-# 2017-2018 Programação 1 (LTI)
+# 2017-2018 Fundamentos de Programação (MI)
 # Grupo 008
 # 51705 Catarina Sofia Esteves Leote
 # 50701 Martim Duarte da Costa Seco
 
 def write_operators_file(operators, header, file_name): # Martim
     """
-    Write a file from a collection of operatiors.
+    Write a file from a collection of operators.
     Requires: operators, the list of operators
     Requires: header, the first 7 lines of the file
     Requires: file_name, str with the name of a text file to write a list of operators.
@@ -27,5 +27,23 @@ def write_operators_file(operators, header, file_name): # Martim
 
     out_file.close()
 
-def write_assignments_file(assignments, header, file_name):
-	pass
+def write_assignments_file(assignments, header, file_name): # Catarina
+    """
+    Write a file from a collection of assignments.
+    Requires: assignments, the list of assignments
+    Requires: header, the first 7 lines of the file # porquê as 7 primeiras linhas?
+    Requires: file_name, str with the name of a text file to write a list of assignments.
+    Ensures: the file is written on the file system
+    """
+    out_file = open (file_name, 'w', encoding='iso-8859-1')
+    for line in header:
+        out_file.write(line)
+    
+    out_file.write('/n')
+
+    for assign in assignments:
+        values = [o['name'], r['name'], start_time]
+        line = ','.join(values)
+        out_file.write('%s\n' %line)
+        
+    out_file.close()
