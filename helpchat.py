@@ -39,4 +39,4 @@ def main(op_in, req_in, time_out, op_out): # Martim
     write_assignments_file(assignments, header, time_out)
     write_operators_file(operators, header, op_out)
 
-main('operators14h55.txt','requests14h55.txt','timetable15h00.txt','operators15h00.txt')
+#main('operators14h55.txt','requests14h55.txt','timetable15h00.txt','operators15h00.txt')
