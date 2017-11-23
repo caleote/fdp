@@ -56,3 +56,4 @@ def read_requests_file(file_name):
          })
     in_file.close()
     return requests
+

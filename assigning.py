@@ -6,9 +6,6 @@
 
 from dateTime import *
 
-
-
-
 def assign_tasks(operators, requests, current_time): #Catarina Martim
     """Assign operators to pending requests.
 
@@ -36,7 +33,7 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
         else:
             assignment = {'operator': 'not-assigned', 'client': r['name'], 'time': current_time}
 
-        assignments.append(assignment)
+        assignments.append(assignment) #começa com lista vazia e vai adicionando um operador a um request
     # When all assignments are done :
     return assignments
 

@@ -5,7 +5,6 @@
 # 50701 Martim Duarte da Costa Seco
 
 from constants import *
-
 import assigning
 from dateTime import add_minutes
 from filesReading import *
@@ -16,22 +15,23 @@ def testReadingWriting(): #Martim
     """
     This function is for testing the read functions
     """
-    print('Reading requests')
-    requests = read_requests_file(REQ_FILENAME)
-    for r in requests:
-        print(r)
+   # print('Reading requests')
+    #requests = read_requests_file(REQ_FILENAME)
+    #for r in requests:
+     #   print(r)
 
     print()
 
-    print('Reading operators')
-    operators = read_operators_file(OP_FILENAME)
-    for o in operators:
-        print(o)
+    #print('Reading operators')
+    #operators = read_operators_file(OP_FILENAME)
+    #for o in operators:
+     #   print(o)
 
     ## fazer alguma coisa
 
     header = ["Ola","Ola"] # Tem que ser o header do ficheiro
     write_operators_file(operators, header,OUT_OP_FILENAME)
+    write_assignments_file(requests, header, time_out)
 
 
 def testDateTime():  # Martim
@@ -78,7 +78,7 @@ def testOrderOperators():
 def testOrderRequests():
     pass
 
-#testReadingWriting()
+testReadingWriting()
 #testDateTime()
 #testFindOperator()
-testAssigning()
+#testAssigning()
