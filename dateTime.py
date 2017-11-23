@@ -12,7 +12,6 @@ def get_hours(hm):
     """
     return int(hm.split(':')[0])
 
-
 def get_minutes(hm): #Catarina
     """
     Get the number of minutes from a HH:MM time representation.
@@ -36,15 +35,27 @@ def add_minutes(hm, incr): #Catarina e Martim
     allminutes = allminutes + incr
     return '%02d:%02d' % (int(allminutes/60)%24, allminutes%60)
 
+def max_time(time1, time2):
+    """
+    Returns the highest value between t1 and t2.
+    Requires:
+    - t1 str with a time represented as HH:MM
+    - t2 str with a time represented as HH:MM
+    Ensures: str with a time represented as HH:MM, the highest value between t1 and t2.
+    """
+    hours1 = get_hours(time1)
+    minutes1 = get_minutes(time1)
+    hours2 = get_hours(time2)
+    minutes2 = get_minutes(time2)
+    if hours1 != hours2 :
+        if hours1 > hours2:
+            max = '%02d:%02d' % (hours1, minutes1)
+        else:
+            max = '%02d:%02d' % (hours2, minutes2)
+    else:
+        if minutes1 > minutes2:
+            max = '%02d:%02d' % (hours1, minutes1)
+        else:
+            max = '%02d:%02d' % (hours2, minutes2)
+    return max
 
- # para adicionar datas e horas e minutos e segundos
-# import date
-# import datetime
-# datetime.datetime(2100,2,28,23,50) + datetime.timedelta(minutes=11)
-# conta com tudo, até anos bissextos
-
-
-
-# TODO max
-def max_time(t1, t2):
-        return t1
