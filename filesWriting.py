@@ -12,7 +12,7 @@ def write_operators_file(operators, header, file_name): # Martim
     Requires: file_name, str with the name of a text file to write a list of operators.
     Ensures: the file is written on the file system
     """
-    out_file = open(file_name, 'w', encoding='iso-8859-1') #acentos dentro do ficheiro
+    out_file = open(file_name, 'w')
     for line in header:
         out_file.write(line) # writes one line at a time
 
@@ -35,7 +35,7 @@ def write_assignments_file(assignments, header, file_name): # Catarina
     Requires: file_name, str with the name of a text file to write a list of assignments.
     Ensures: the file is written on the file system
     """
-    out_file = open (file_name, 'w', encoding='iso-8859-1')
+    out_file = open (file_name, 'w')
     for line in header:
         out_file.write(line)
     
