@@ -4,8 +4,6 @@
 # 51705 Catarina Sofia Esteves Leote
 # 50701 Martim Duarte da Costa Seco
 
-from assigning import *
-
 def write_operators_file(operators, header, file_name): # Martim
     """
     Write a file from a collection of operators.
