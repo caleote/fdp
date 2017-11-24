@@ -31,7 +31,7 @@ def testReadingWriting(): #Martim
 
     header = ["Ola","Ola"] # Tem que ser o header do ficheiro
     write_operators_file(operators, header,OUT_OP_FILENAME)
-    write_assignments_file(requests, header, time_out)
+    write_assignments_file(ass, header, time_out) #aqui é ass em vez de requests que era o que tinhas antes
 
 
 def testDateTime():  # Martim
@@ -64,7 +64,8 @@ requests = [
 
 def testAssigning():
     assignments = assigning.assign_tasks(operators, requests, "14:55")
-    print(assignments)
+    #print(assignments)
+    return assignments #tens de retornar o assignments para poder testar o ReadingWriting
 
 def testFindOperator():
     operator = assigning.find_matching_operator(operators, 'spanish', 'hifi','14:55')
@@ -78,7 +79,8 @@ def testOrderOperators():
 def testOrderRequests():
     pass
 
+ass = testAssigning() #para testar o ReadingWriting tens de ter um assignment
 testReadingWriting()
 #testDateTime()
 #testFindOperator()
-#testAssigning()
+
