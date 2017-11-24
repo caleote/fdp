@@ -14,7 +14,7 @@ def write_operators_file(operators, header, file_name): # Martim
     Requires: file_name, str with the name of a text file to write a list of operators.
     Ensures: the file is written on the file system
     """
-    out_file = open(file_name, 'w', encoding='iso-8859-1') #acentos dentro do ficheiro
+    out_file = open(file_name, 'w')
     for line in header:
         out_file.write(line) # writes one line at a time
 
@@ -37,17 +37,16 @@ def write_assignments_file(assignments, header, file_name): # Catarina
     Requires: file_name, str with the name of a text file to write a list of assignments.
     Ensures: the file is written on the file system
     """
-    out_file = open (file_name, 'w', encoding='iso-8859-1')
+    out_file = open (file_name, 'w')
     for line in header:
         out_file.write(line)
     
     out_file.write('\n') # a barra é para o outro lado :)
 
-    for assign in assignments: #'operator' : o['name'], 'client' : r['name']
-        values = [assignments[o['name']], assignments['client'], start_time] #erro no segundo name
+    for assign in assignments:
+        values = [assign['operator'], assign['client'], assign['time']] #erro no segundo name
         line = ','.join(values)
         out_file.write('%s\n' %line)
-    print(assignments)
         
     out_file.close()
 
