@@ -4,6 +4,8 @@
 # 51705 Catarina Sofia Esteves Leote
 # 50701 Martim Duarte da Costa Seco
 
+from assigning import *
+
 def write_operators_file(operators, header, file_name): # Martim
     """
     Write a file from a collection of operators.
@@ -39,11 +41,12 @@ def write_assignments_file(assignments, header, file_name): # Catarina
     for line in header:
         out_file.write(line)
     
-    out_file.write('/n')
+    out_file.write('\n')
 
     for assign in assignments:
-        values = [assign['name'], requests['name'], start_time] #erro no segundo name
+        values = [assign['operator'], assign['client'], assign['time']] #erro no segundo name
         line = ','.join(values)
         out_file.write('%s\n' %line)
         
     out_file.close()
+
