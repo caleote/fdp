@@ -79,8 +79,9 @@ def testOrderOperators():
 def testOrderRequests():
     pass
 
+print(type(o['minutesDone']))
 ass = testAssigning() #para testar o ReadingWriting tens de ter um assignment
-testReadingWriting()
+#testReadingWriting()
 #testDateTime()
 #testFindOperator()
-
+#testAssigning()

@@ -5,6 +5,7 @@
 # 50701 Martim Duarte da Costa Seco
 
 from assigning import *
+from filesReading import *
 
 def write_operators_file(operators, header, file_name): # Martim
     """
@@ -41,12 +42,13 @@ def write_assignments_file(assignments, header, file_name): # Catarina
     for line in header:
         out_file.write(line)
     
-    out_file.write('\n') # a barra é para o outro lado :)
+    out_file.write('\n')
 
     for assign in assignments:
-        values = [assign['operator'], assign['client'], assign['time']] #erro no segundo name
+        values = [assign['operator'], assign['client'], assign['time']]
         line = ','.join(values)
         out_file.write('%s\n' %line)
         
     out_file.close()
+
 

@@ -29,7 +29,8 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
             start_time = max_time(current_time, o['hourFinish'])
 
             assignment = {'operator' : o['name'], 'client' : r['name'], 'time' : start_time}
-
+            o['minutesDone'] = o['minutesDone'] + r['duration']
+            o['hourFinish'] = add_minutes(current_time, r['duration'])
         else:
             assignment = {'operator': 'not-assigned', 'client': r['name'], 'time': current_time}
 
