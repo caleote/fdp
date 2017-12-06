@@ -29,8 +29,17 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
             start_time = max_time(current_time, o['hourFinish'])
 
             assignment = {'operator' : o['name'], 'client' : r['name'], 'time' : start_time}
-            o['minutesDone'] = o['minutesDone'] + r['duration']
-            o['hourFinish'] = add_minutes(current_time, r['duration'])
+
+            ##CONFUSÃO AINDA POR DESCOBRIR!
+            #duration = setTime(r['duration'])
+            #print('duration:', duration)
+            #print('durationType:', type(duration))
+            #o['minutesDone'] = add_minutes(o['minutesDone'],r['duration'])
+            #TEM ERRO (que deve ser uma string e não int porque a duração é int e ele não consegue fazer o addTime
+            #o['minutesDone'] = o['minutesDone'] + r['duration']
+            #print('minutesDonetype:', type(o['minutesDone']))
+
+            #o['hourFinish'] = add_minutes(current_time, r['duration'])
         else:
             assignment = {'operator': 'not-assigned', 'client': r['name'], 'time': current_time}
 
@@ -52,6 +61,7 @@ def find_matching_operator(operators, language, domain, time): # Martim
     :return:
     '''
 
+    #TODO Ordenar (com desempates e reordenação depois do update)
     # Ordena-se primeiro... faltam os desempates e a reordenação depois de um update
 
     for o in operators:
@@ -60,4 +70,10 @@ def find_matching_operator(operators, language, domain, time): # Martim
 
     return None
 
-
+def headername(file_name): #Catarina
+    in_file = open(file_name, 'r')
+    lines = in_file.readlines()
+    time = lines[3]
+    typeoffile = (lines[6])[:-2]
+    in_file.close()
+    return time, typeoffile

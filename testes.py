@@ -15,23 +15,25 @@ def testReadingWriting(): #Martim
     """
     This function is for testing the read functions
     """
-   # print('Reading requests')
-    #requests = read_requests_file(REQ_FILENAME)
-    #for r in requests:
-     #   print(r)
+    print('Reading requests')
+    requests = read_requests_file(REQ_FILENAME)
+    for r in requests:
+        print(r)
 
     print()
 
-    #print('Reading operators')
-    #operators = read_operators_file(OP_FILENAME)
-    #for o in operators:
-     #   print(o)
+    print('Reading operators')
+    operators = read_operators_file(OP_FILENAME)
+    for o in operators:
+        print(o)
+    print('operators type:', type(operators))
+    print('name:', operators[0])
 
     ## fazer alguma coisa
 
-    header = ["Ola","Ola"] # Tem que ser o header do ficheiro
-    write_operators_file(operators, header,OUT_OP_FILENAME)
-    write_assignments_file(ass, header, time_out) #aqui é ass em vez de requests que era o que tinhas antes
+    #header = ["Ola","Ola"] # Tem que ser o header do ficheiro
+    #write_operators_file(operators, header,OUT_OP_FILENAME)
+    #write_assignments_file(ass, header, time_out) #aqui é ass em vez de requests que era o que tinhas antes
 
 
 def testDateTime():  # Martim
@@ -79,9 +81,9 @@ def testOrderOperators():
 def testOrderRequests():
     pass
 
-print(type(o['minutesDone']))
-ass = testAssigning() #para testar o ReadingWriting tens de ter um assignment
-#testReadingWriting()
+#ass = testAssigning() #para testar o ReadingWriting tens de ter um assignment
+testReadingWriting()
 #testDateTime()
 #testFindOperator()
 #testAssigning()
+

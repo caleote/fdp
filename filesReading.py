@@ -28,7 +28,14 @@ def read_operators_file(file_name): # Martim
         'minutesDone':minutesDone
          })
     in_file.close()
+
     return operators
+
+o = read_operators_file('operators15h00.txt')
+print('o type:', type(o))
+print('o:', o)
+#print(o.values())
+
 
 def read_requests_file(file_name):
     """

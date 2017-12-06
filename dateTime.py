@@ -59,3 +59,14 @@ def max_time(time1, time2):
             max = '%02d:%02d' % (hours2, minutes2)
     return max
 
+'''ESQUECE ISTO MAS CASO DEPOIS VENHA A SER PRECISO FICA AQUI :P
+Aqui nós temos de fazer uma função setTime que defina os minutos da duração no nosso formato de hora HH:MM'''
+def setTime (minutes):
+    """
+    Sets a time format (string) HH:MM for a time in minutes.
+    Requires:
+    - minutes int
+    Ensures: str with a time represented as HH:MM
+    """
+    return '%02d:%02d' % (int(minutes/60)%24, minutes%60)
+
