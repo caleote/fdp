@@ -5,6 +5,7 @@
 # 50701 Martim Duarte da Costa Seco
 
 from dateTime import *
+from filesReading import *
 
 def assign_tasks(operators, requests, current_time): #Catarina Martim
     """Assign operators to pending requests.
@@ -28,27 +29,15 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
         if o != None:
             start_time = max_time(current_time, o['hourFinish'])
 
-            assignment = {'operator' : o['name'], 'client' : r['name'], 'time' : start_time}
-
-            ##CONFUSÃO AINDA POR DESCOBRIR!
-            #duration = setTime(r['duration'])
-            #print('duration:', duration)
-            #print('durationType:', type(duration))
-            #o['minutesDone'] = add_minutes(o['minutesDone'],r['duration'])
-            #TEM ERRO (que deve ser uma string e não int porque a duração é int e ele não consegue fazer o addTime
-            #o['minutesDone'] = o['minutesDone'] + r['duration']
-            #print('minutesDonetype:', type(o['minutesDone']))
-
-            #o['hourFinish'] = add_minutes(current_time, r['duration'])
+            assignment = {'operator': o['name'], 'client': r['name'], 'time': start_time}
+            o['minutesDone'] = int(o['minutesDone']) + r['duration']
+            o['hourFinish'] = add_minutes(current_time, r['duration'])
         else:
             assignment = {'operator': 'not-assigned', 'client': r['name'], 'time': current_time}
 
         assignments.append(assignment) #começa com lista vazia e vai adicionando um operador a um request
     # When all assignments are done :
     return assignments
-
-
-
 
 #TODO find mach ope
 def find_matching_operator(operators, language, domain, time): # Martim
