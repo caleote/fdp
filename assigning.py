@@ -30,23 +30,36 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
     Ensures: a list of assignments of operators to requests, according to the conditions indicated
     in the general specification (omitted here for the sake of readability).
     """
-    #TODO ordenar primium e fremium
-
     assignments = []
+    fremiumList = []
     for r in requests:
-        #encontrar operador mach
-        o = find_matching_operator(operators, r['language'], r['domain'], current_time)
+        if isPremium(r) == True:
+            #encontrar operador mach
+            o = find_matching_operator(operators, r['language'], r['domain'], current_time)
 
+            if o != None:
+                start_time = max_time(current_time, o['hourFinish'])
+
+                assignment = {'operator': o['name'], 'client': r['name'], 'time': start_time}
+                o['minutesDone'] = int(o['minutesDone']) + r['duration']
+                o['hourFinish'] = add_minutes(current_time, r['duration'])
+            else:
+                assignment = {'operator': 'not-assigned', 'client': r['name'], 'time': current_time}
+
+            assignments.append(assignment) #começa com lista vazia e vai adicionando um operador a um request
+        else:
+            fremiumList.append(r)
+
+    for f in fremiumList:
+        o = find_matching_operator(operators, f['language'], f['domain'], current_time)
         if o != None:
             start_time = max_time(current_time, o['hourFinish'])
-
-            assignment = {'operator': o['name'], 'client': r['name'], 'time': start_time}
-            o['minutesDone'] = int(o['minutesDone']) + r['duration']
-            o['hourFinish'] = add_minutes(current_time, r['duration'])
+            assignment = {'operator': o['name'], 'client': f['name'], 'time': start_time}
+            o['minutesDone'] = int(o['minutesDone']) + f['duration']
+            o['hourFinish'] = add_minutes(current_time, f['duration'])
         else:
-            assignment = {'operator': 'not-assigned', 'client': r['name'], 'time': current_time}
-
-        assignments.append(assignment) #começa com lista vazia e vai adicionando um operador a um request
+            assignment = {'operator': 'not-assigned', 'client': f['name'], 'time': current_time}
+        assignments.append(assignment)
     # When all assignments are done :
     return assignments
 
