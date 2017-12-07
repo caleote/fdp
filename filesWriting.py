@@ -43,6 +43,7 @@ def write_assignments_file(assignments, header, file_name): # Catarina
         values = [assign['operator'], assign['client'], assign['time']]
         line = ','.join(values)
         out_file.write('%s\n' %line)
+        
     out_file.close()
 
 
