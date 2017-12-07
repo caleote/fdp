@@ -32,33 +32,33 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
     """
     assignments = []
     fremiumList = []
-    for r in requests:
-        if isPremium(r) == True:
+    for req in requests:
+        if isPremium(req) == True:
             #encontrar operador mach
-            o = find_matching_operator(operators, r['language'], r['domain'], current_time)
+            op = find_matching_operator(operators, req['language'], req['domain'], current_time)
 
-            if o != None:
-                start_time = max_time(current_time, o['hourFinish'])
+            if op != None:
+                start_time = max_time(current_time, op['hourFinish'])
 
-                assignment = {'operator': o['name'], 'client': r['name'], 'time': start_time}
-                o['minutesDone'] = int(o['minutesDone']) + r['duration']
-                o['hourFinish'] = add_minutes(current_time, r['duration'])
+                assignment = {'operator': op['name'], 'client': req['name'], 'time': start_time}
+                op['minutesDone'] = int(op['minutesDone']) + req['duration']
+                op['hourFinish'] = add_minutes(current_time, req['duration'])
             else:
-                assignment = {'operator': 'not-assigned', 'client': r['name'], 'time': current_time}
+                assignment = {'operator': 'not-assigned', 'client': req['name'], 'time': current_time}
 
             assignments.append(assignment) #começa com lista vazia e vai adicionando um operador a um request
         else:
-            fremiumList.append(r)
+            fremiumList.append(req)
 
-    for f in fremiumList:
-        o = find_matching_operator(operators, f['language'], f['domain'], current_time)
-        if o != None:
-            start_time = max_time(current_time, o['hourFinish'])
-            assignment = {'operator': o['name'], 'client': f['name'], 'time': start_time}
-            o['minutesDone'] = int(o['minutesDone']) + f['duration']
-            o['hourFinish'] = add_minutes(current_time, f['duration'])
+    for fre in fremiumList:
+        op = find_matching_operator(operators, fre['language'], fre['domain'], current_time)
+        if op != None:
+            start_time = max_time(current_time, op['hourFinish'])
+            assignment = {'operator': op['name'], 'client': fre['name'], 'time': start_time}
+            op['minutesDone'] = int(op['minutesDone']) + fre['duration']
+            op['hourFinish'] = add_minutes(current_time, fre['duration'])
         else:
-            assignment = {'operator': 'not-assigned', 'client': f['name'], 'time': current_time}
+            assignment = {'operator': 'not-assigned', 'client': fre['name'], 'time': current_time}
         assignments.append(assignment)
     # When all assignments are done :
     return assignments
@@ -73,14 +73,11 @@ def find_matching_operator(operators, language, domain, time): # Martim
     :param time:
     :return:
     '''
-
     #TODO Ordenar (com desempates e reordenação depois do update)
     # Ordena-se primeiro... faltam os desempates e a reordenação depois de um update
-
-    for o in operators:
-        if o['language'] == language and domain in o['domains']:
-            return o
-
+    for op in operators:
+        if op['language'] == language and domain in op['domains']:
+            return op
     return None
 
 def headername(file_name): #Catarina
