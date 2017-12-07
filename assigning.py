@@ -30,12 +30,34 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
     Ensures: a list of assignments of operators to requests, according to the conditions indicated
     in the general specification (omitted here for the sake of readability).
     """
+
+    oplist = read_operators_file(operators)
+    opdict = []
+    for t in range (len(oplist)):
+        opdict.append(
+        {'name':oplist[t][0],
+        'language':oplist[t][1],
+        'domains':oplist[t][2],
+        'hourFinish':oplist[t][3],
+        'minutesDone':oplist[t][4]
+         })
+
+    reqlist = read_requests_file(requests)
+    reqdict = []
+    for t in range (len(reqlist)):
+        reqdict.append(
+        {'name':reqlist[t][0],
+         'language':reqlist[t][1],
+         'domain':reqlist[t][2],
+         'service':reqlist[t][3],
+         'duration':reqlist[t][4]
+         })
     assignments = []
     fremiumList = []
-    for req in requests:
+    for req in reqdict:
         if isPremium(req) == True:
-            #encontrar operador mach
-            op = find_matching_operator(operators, req['language'], req['domain'], current_time)
+            #encontrar operador match
+            op = findMatchingOperator(opdict, req['language'], req['domain'], current_time)
 
             if op != None:
                 start_time = max_time(current_time, op['hourFinish'])
@@ -51,7 +73,7 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
             fremiumList.append(req)
 
     for fre in fremiumList:
-        op = find_matching_operator(operators, fre['language'], fre['domain'], current_time)
+        op = findMatchingOperator(opdict, fre['language'], fre['domain'], current_time)
         if op != None:
             start_time = max_time(current_time, op['hourFinish'])
             assignment = {'operator': op['name'], 'client': fre['name'], 'time': start_time}
@@ -63,8 +85,7 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
     # When all assignments are done :
     return assignments
 
-#TODO find mach ope
-def find_matching_operator(operators, language, domain, time): # Martim
+def findMatchingOperator(operators, language, domain, time): # Martim
     '''
     TODO preencer
     :param operators:
@@ -73,8 +94,10 @@ def find_matching_operator(operators, language, domain, time): # Martim
     :param time:
     :return:
     '''
+
     #TODO Ordenar (com desempates e reordenação depois do update)
     # Ordena-se primeiro... faltam os desempates e a reordenação depois de um update
+
     for op in operators:
         if op['language'] == language and domain in op['domains']:
             return op
