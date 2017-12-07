@@ -10,12 +10,19 @@ HEADER_TOTAL_LINES = 7
 
 
 # Indexes pertaining the request tuple
-REQ_INDEX_LANGUAGE = 1
-REQ_INDEX_DOMAIN = 2
+req_name = 0
+req_language = 1
+req_domain = 2
+req_service = 3
+req_duration = 4
 
 
 # Indexes pertaining the operator collection
-OP_INDEX_LANGUAGE = 0
+op_name = 0
+op_language = 1
+op_domains = 2
+op_hourFinish = 3
+op_minutesDone = 4
 
 
 # Example Filenames
