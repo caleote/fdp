@@ -7,9 +7,21 @@
 from dateTime import *
 from filesReading import *
 
-def assign_tasks(operators, requests, current_time): #Catarina Martim
-    """Assign operators to pending requests.
+def isPremium(request): #Catarina
+    """
+    Returns the information if the service of the request is premium or not
+    Requires:
+    - request, one request, structures as the output of filesReading.read_request_file with a service.
+    Ensures: that returns True if the service of a request is premium and False if it is not.
+    """
+    if request['service'] == 'premium':
+        return True
+    else:
+        return False
 
+def assign_tasks(operators, requests, current_time): #Catarina Martim
+    """
+    Assign operators to pending requests.
     Requires:
     - operators, a collection of operators, structured as the output of
       filesReading.read_operators_file;
