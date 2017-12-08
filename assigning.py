@@ -63,8 +63,11 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
         op = findMatchingOperator(opdict, req['duration'], req['language'], req['domain'], current_time)
         if op != None:
             start_time = max_time(current_time, op['hourFinish'])
-            assignment = {'operator': op['name'], 'client': req['name'], 'time': start_time}
-            op['hourFinish'] = add_minutes(current_time, req['duration'])
+            op['minutesDone'] = int(op['minutesDone']) + req['duration']
+            assignment = {'operator': op['name'], 'client': req['name'], 'time': start_time} #porque é que no assignment queremos o start-time? não devia de ser o finishHour actualizado?
+            op['hourFinish'] = add_minutes(start_time, req['duration']) #aqui estava add_minutes(current_time, req['duration'])
+            print('hourFinish2:', op['name'], ':', op['hourFinish'])
+            print('minutesDone2:', op['name'], ':', op['minutesDone'])
         else:
             assignment = {'operator': 'not-assigned', 'client': req['name'], 'time': current_time}
         assignments.append(assignment)
@@ -83,7 +86,12 @@ def findMatchingOperator(operators, duration, language, domain, time): # Martim
     omin = None
     for op in operators:
         if op['language'] == language and domain in op['domains'] and int(op['minutesDone']) + duration <= 240:
-            if omin == None or op['hourFinish'] < omin['hourFinish'] or op['hourFinish'] == omin['hourFinish'] and (op['minutesDone'] < omin['minutesDone'] or op['minutesDone'] == omin['minutesDone'] and op['name'] < omin['name']):
+            print('hourFinish:', op['name'], ':', op['hourFinish'])
+            print('minutesDone:', op['name'], ':', op['minutesDone'])
+            if omin == None or op['hourFinish'] < omin['hourFinish'] or op['hourFinish'] == omin['hourFinish'] and op['minutesDone'] < omin['minutesDone'] or op['minutesDone'] == omin['minutesDone'] and op['name'] < omin['name']:
+                # o erro está aqui no saber que os minutes done de uma são menores q a outra.. e no hourFinish, mandei-te uma foto pelo face q tem o exemplo do q tá a acontecer
+                print('hourFinish1:', op['name'], ':', op['hourFinish'])
+                print('minutesDone1:', op['name'], ':', op['minutesDone'])
                 omin = op
     return omin
 
