@@ -70,39 +70,6 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
         assignments.append(assignment)
     return assignments
 
-def minMinutes(minutes1, minutes2):
-    '''
-    #TODO preencher
-    :param minutes1:
-    :param minutes2:
-    :return:
-    '''
-    minutes1 = int(minutes1)
-    minutes2 = int(minutes2)
-    if minutes1 <= minutes2:
-        return minutes1
-    else:
-        return minutes2
-
-def firstInAlphabet(word1, word2):
-    '''
-    #TODO preencher
-    SE HOUVER TEMPO CORRIGIR ISTO PARA O CASO DA ANA E DA ANABELA
-    :param word:
-    :return:
-    '''
-    if word1 == word2:
-        return word1
-    else:
-        for l in range (len(word1)):
-            if word1[l] == word2[l]:
-                l += 1
-            else:
-                if word1[l] < word2[l]:
-                    return word1
-                else:
-                    return word2
-
 def findMatchingOperator(operators, duration, language, domain, time): # Martim
     '''
     TODO preencer
