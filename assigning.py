@@ -15,10 +15,23 @@ def isPremium(request): #Catarina
     - request, one request, structures as the output of filesReading.read_request_file with a service.
     Ensures: that returns True if the service of a request is premium and False if it is not.
     """
-    if request['service'] == 'premium':
-        return True
-    else:
-        return False
+    return request['service'] == 'premium'
+
+def reqTupleToDict(req):
+    return {'name':req[0],
+         'language':req[1],
+         'domain':req[2],
+         'service':req[3],
+         'duration':req[4]
+         }
+
+def opTupleToDict(op):
+    return {'name':op[0],
+        'language':op[1],
+        'domains':op[2],
+        'hourFinish':op[3],
+        'minutesDone':op[4]
+         }
 
 def assign_tasks(operators, requests, current_time): #Catarina Martim
     """
@@ -31,57 +44,30 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
     Ensures: a list of assignments of operators to requests, according to the conditions indicated
     in the general specification (omitted here for the sake of readability).
     """
-
     oplist = read_operators_file(operators)
     opdict = []
-    for t in range (len(oplist)):
-        opdict.append(
-        {'name':oplist[t][0],
-        'language':oplist[t][1],
-        'domains':oplist[t][2],
-        'hourFinish':oplist[t][3],
-        'minutesDone':oplist[t][4]
-         })
+    for op in oplist:
+        opdict.append(opTupleToDict(op))
     reqlist = read_requests_file(requests)
-    reqdict = []
-    for t in range (len(reqlist)):
-        reqdict.append(
-        {'name':reqlist[t][0],
-         'language':reqlist[t][1],
-         'domain':reqlist[t][2],
-         'service':reqlist[t][3],
-         'duration':reqlist[t][4]
-         })
-
-    assignments = []
-    fremiumList = []
-    for req in reqdict:
-        if isPremium(req) == True:
-            #encontrar operador match
-            op = findMatchingOperator(opdict, req['duration'], req['language'], req['domain'], current_time)
-
-            if op != None:
-                start_time = max_time(current_time, op['hourFinish'])
-
-                assignment = {'operator': op['name'], 'client': req['name'], 'time': start_time}
-                op['hourFinish'] = add_minutes(current_time, req['duration'])
-            else:
-                assignment = {'operator': 'not-assigned', 'client': req['name'], 'time': current_time}
-
-            assignments.append(assignment) #começa com lista vazia e vai adicionando um operador a um request
+    premium = []
+    fremium = []
+    for req in reqlist:
+        reqdict = reqTupleToDict(req)
+        if isPremium(reqdict):
+            premium.append(reqdict)
         else:
-            fremiumList.append(req)
-
-    for fre in fremiumList:
-        op = findMatchingOperator(opdict, fre['duration'], fre['language'], fre['domain'], current_time)
+            fremium.append(reqdict)
+    requests = premium + fremium
+    assignments = []
+    for req in requests:
+        op = findMatchingOperator(opdict, req['duration'], req['language'], req['domain'], current_time)
         if op != None:
             start_time = max_time(current_time, op['hourFinish'])
-            assignment = {'operator': op['name'], 'client': fre['name'], 'time': start_time}
-            op['hourFinish'] = add_minutes(current_time, fre['duration'])
+            assignment = {'operator': op['name'], 'client': req['name'], 'time': start_time}
+            op['hourFinish'] = add_minutes(current_time, req['duration'])
         else:
-            assignment = {'operator': 'not-assigned', 'client': fre['name'], 'time': current_time}
+            assignment = {'operator': 'not-assigned', 'client': req['name'], 'time': current_time}
         assignments.append(assignment)
-    # When all assignments are done :
     return assignments
 
 def minMinutes(minutes1, minutes2):
@@ -127,29 +113,15 @@ def findMatchingOperator(operators, duration, language, domain, time): # Martim
     :return:
     '''
 
-    #TODO Ordenar (com desempates e reordenação depois do update)
-    # Ordena-se primeiro... faltam os desempates e a reordenação depois de um update
-
+    omin = None
     for op in operators:
-        for op2 in operators:
-            if op2 != op:
-                if op['language'] == language and domain in op['domains']:
-                    print('op14:', op['name'])
-                    print('op24:', op2['name'])
-                    if op['hourFinish'] == str(min_time(op['hourFinish'], op2['hourFinish'])):
-                        print('op15:', op['name'])
-                        print('op25:', op2['name'])
-                        if op['minutesDone'] == str(minMinutes(op['minutesDone'], op2['minutesDone'])):
-                            op['minutesDone'] = int(op['minutesDone']) + duration
-                            if op['minutesDone'] <= 240:
-                                if op['name'] == firstInAlphabet(op['name'], op2['name']):
-                                    return op
-    return None
+        if op['language'] == language and domain in op['domains'] and int(op['minutesDone']) + duration <= 240:
+            if omin == None or op['hourFinish'] < omin['hourFinish'] or op['hourFinish'] == omin['hourFinish'] and (op['minutesDone'] < omin['minutesDone'] or op['minutesDone'] == omin['minutesDone'] and op['name'] < omin['name']):
+                omin = op
+    return omin
 
-operators = [('Tiago','french','laptops', '16:50','113'), ('Helena','french', 'laptops', '16:57', '198')]
-ass = assign_tasks('operators16h55.txt', 'requests16h55.txt', '17:00')
+ass = assign_tasks('examples/example2/operators11h05.txt','examples/example2/requests11h05.txt', '11:10')
 print ('ass:', ass)
-
 
 def headername(file_name): #Catarina
     in_file = open(file_name, 'r')
