@@ -5,6 +5,6 @@ Time:
 Company:
 NSHF
 Timetable:
-14:55, François Greenwich, Núria Castro
+14:55, Francois Greenwich, Nuria Castro
 14:55, Henry Miller, Carl Thompson
 14:55, Ricardo Carvalho, not-assigned

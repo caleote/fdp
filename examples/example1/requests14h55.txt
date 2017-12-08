@@ -6,5 +6,5 @@ Company:
 NSHF
 Requests:
 Henry Miller, english, laptops, premium, 3
-François Greenwich, spanish, cameras, premium, 6
+Francois Greenwich, spanish, cameras, premium, 6
 Ricardo Carvalho, portuguese, refrigerators, premium, 2

@@ -14,5 +14,5 @@ David Larenz, german, phones, premium, 17
 Yolande Durand, french, phones, fremium, 20
 Kyriaki Megalos, greek, cameras, premium, 20
 Constantin Nicolas, french, cameras, fremium, 25
-Viktoria Baumgärtner, german, hifi, premium, 20
+Viktoria Baumgartner, german, hifi, premium, 20
 Solange Leblanc, french, cameras, premium, 30
