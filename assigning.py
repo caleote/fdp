@@ -1,5 +1,4 @@
-# coding=utf-8
-# 2017-2018 Fundamentos de Programação (MI)
+# 2017-2018 Fundamentos de Programacao  (MI)
 # Grupo 008
 # 51705 Catarina Sofia Esteves Leote
 # 50701 Martim Duarte da Costa Seco
@@ -69,18 +68,18 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
     requests = premium + fremium
     assignments = []
     for req in requests:
-        op = findMatchingOperator(opdict, req['duration'], req['language'], req['domain'], current_time)
+        op = findMatchingOperator(opdict, req['duration'], req['language'], req['domain'])
         if op != None:
             start_time = max_time(current_time, op['hourFinish'])
             op['minutesDone'] = int(op['minutesDone']) + req['duration']
-            assignment = {'operator': op['name'], 'client': req['name'], 'time': start_time} #porque é que no assignment queremos o start-time? não devia de ser o finishHour actualizado?
-            op['hourFinish'] = add_minutes(start_time, req['duration']) #aqui estava add_minutes(current_time, req['duration'])
+            assignment = {'operator': op['name'], 'client': req['name'], 'time': start_time}
+            op['hourFinish'] = add_minutes(start_time, req['duration'])
         else:
             assignment = {'operator': 'not-assigned', 'client': req['name'], 'time': current_time}
         assignments.append(assignment)
     return assignments, opdict
 
-def findMatchingOperator(operators, duration, language, domain, time): # Martim
+def findMatchingOperator(operators, duration, language, domain): # Martim
     '''
     TODO preencer
     :param operators:

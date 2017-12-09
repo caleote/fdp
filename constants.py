@@ -1,5 +1,4 @@
-# coding=utf-8
-# 2017-2018 Fundamentos de Programação (MI)
+# 2017-2018 Fundamentos de Programacao (MI)
 # Grupo 008
 # 51705 Catarina Sofia Esteves Leote
 # 50701 Martim Duarte da Costa Seco
@@ -7,7 +6,7 @@
 
 # Constants pertaining to the file headers
 HEADER_TOTAL_LINES = 7
-DELTA_TIME = 5 #gab between actualizations
+DELTA_TIME = 5 #gap between actualizations
 
 # Indexes pertaining the request tuple
 REQ_INDEX_NAME = 0

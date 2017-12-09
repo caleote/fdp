@@ -1,5 +1,4 @@
-# coding=utf-8
-# 2017-2018 Fundamentos de Programação (MI)
+# 2017-2018 Fundamentos de Programacao  (MI)
 # Grupo 008
 # 51705 Catarina Sofia Esteves Leote
 # 50701 Martim Duarte da Costa Seco
@@ -82,13 +81,4 @@ def min_time(time1, time2):
             min = '%02d:%02d' % (hours2, minutes2)
     return min
 
-def setTime (minutes):
-    """
-    Sets a time format (string) HH:MM for a time in minutes.
-    Requires:
-    - minutes str
-    Ensures: str with a time represented as HH:MM
-    """
-    minutesfinal = int(minutes)
-    return '%02d:%02d' % ((minutesfinal/60)%24, minutesfinal%60)
 

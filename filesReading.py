@@ -1,5 +1,4 @@
-# coding=utf-8
-# 2017-2018 Fundamentos de Programação (MI)
+# 2017-2018 Fundamentos de Programacao  (MI)
 # Grupo 008
 # 51705 Catarina Sofia Esteves Leote
 # 50701 Martim Duarte da Costa Seco
@@ -14,7 +13,7 @@ def read_operators_file(file_name):  # Martim
     various elements, in the order provided in the file.
     """
     in_file = open(file_name, 'r')
-    for i in range(constants.HEADER_TOTAL_LINES):  # read some lines to skip the header
+    for i in range(constants.HEADER_TOTAL_LINES):
         in_file.readline()
 
     operators = []
@@ -34,7 +33,7 @@ def read_requests_file(file_name):
     various element concerning that request, in the order provided in the file.
     """
     in_file = open(file_name, 'r')
-    for i in range(constants.HEADER_TOTAL_LINES):  # read some lines to skip the header
+    for i in range(constants.HEADER_TOTAL_LINES):
         in_file.readline()
 
     requests = []
@@ -52,6 +51,24 @@ def readHeader(file_name): #Catarina
     day = lines[1]
     time = lines[3][0:5]
     company = lines[5]
-    typeoffile = (lines[6])[:-2]
+    typeFile = (lines[6])[:-2]
     in_file.close()
-    return day, time, company, typeoffile
+    return day, time, company, typeFile
+
+def readFileNameReq(file_name):
+    minutes = file_name[-6:-4]
+    hours = file_name[-9:-7]
+    type = file_name[-17:-9]
+    return minutes, hours, type
+
+def readFileNameOp(file_name):
+    minutes = file_name[-6:-4]
+    hours = file_name[-9:-7]
+    type = file_name[-18:-9]
+    return minutes, hours, type
+
+'''
+minutes, hours, type = readFileNameOp('examples/example4/operators14h55.txt')
+print (type)
+minutes, hours, type = readFileNameReq('examples/example4/requests14h55.txt')
+print (type)'''

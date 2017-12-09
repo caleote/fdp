@@ -1,5 +1,4 @@
-# coding=utf-8
-# 2017-2018 Fundamentos de Programação (MI)
+# 2017-2018 Fundamentos de Programacao (MI)
 # Grupo 008
 # 51705 Catarina Sofia Esteves Leote
 # 50701 Martim Duarte da Costa Seco
@@ -24,16 +23,23 @@ def main(op_in, req_in): # Martim
         - The op_out file contain the operators data updted with the request assignment of file time_out
     '''
 
-    # Reading the files and checking current time
-
     operators = read_operators_file(op_in)
     requests = read_requests_file(req_in)
     oday, otime, ocompany, otype = readHeader(op_in)
-    #TODO testar se o otype = type do nome do ficheiro
     rday, rtime, rcompany, rtype = readHeader(req_in)
-    #TODO testar se o rtype = type do nome do ficheiro
-    if oday == rday and otime == rtime and ocompany == rcompany : #testa se o cabeçalho é igual - EXCEPTION
+    op_in_min, op_in_hour, op_in_type = readFileNameOp(op_in)
+    req_in_min, req_in_hour, req_in_type = readFileNameReq(req_in)
+
+    if otype.lower() != op_in_type or otime != op_in_hour+':'+op_in_min:
+        raise Exception ('Error in input file: inconsistency between name and header in file ' + op_in)
+    if rtype.lower() != req_in_type or rtime != req_in_hour+':'+req_in_min:
+        raise Exception ('Error in input file: inconsistency between name and header in file ' + req_in)
+    if oday != rday or otime != rtime or ocompany != rcompany:
+        raise Exception ('Error in input file: inconsistency between files ' + op_in + ' and ' + req_in)
+    else:
         current_time = otime
+
+
 
     # Assining requests to operators
     assignments, operators = assigning.assign_tasks(operators, requests, current_time)
@@ -47,4 +53,22 @@ def main(op_in, req_in): # Martim
     op_out = constants.OPERATORS_FILE_PREFIX + '%02dh%02d' % (get_hours(nextTime), get_minutes(nextTime)) + constants.FILE_EXTENSION
     write_assignments_file(assignments, header + ttHeader, time_out)
     write_operators_file(operators, header + opHeader, op_out)
-main('operators16h55.txt','requests16h55.txt')
+
+
+#Testing all files
+main('examples/example1/operators14h55.txt','examples/example1/requests14h55.txt')
+main('examples/example2/operators11h05.txt','examples/example2/requests11h05.txt')
+main('examples/example3/operators16h55.txt','examples/example3/requests16h55.txt')
+main('examples/example4/operators14h55.txt','examples/example4/requests14h55.txt')
+main('examples/example5/operators14h55.txt','examples/example5/requests11h05.txt')
+
+
+#fazer um if com sys.argv length que tem de ser 3 senão dá erro
+'''
+try:
+
+    main(sys.argv[1],sys.argv[2])
+except Exception as e:
+    print(e.args[0])'''
+
+#https://docs.python.org/2/tutorial/errors.html
