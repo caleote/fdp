@@ -18,7 +18,8 @@ def write_operators_file(operators, header, file_name): # Martim
     for line in header:
         out_file.write(line) # writes one line at a time
     out_file.write('\n')
-    for op in operators:
+    operatorsorded = sorted(operators, key=lambda k: k['hourFinish']) #aqui não sei ordenar de acordo com a hora e com a ordem alfabética, só consigo 1 de cada vez
+    for op in operatorsorded:
         domains = '(%s)' %('; '.join(op['domains'])) #ao pormos logo aqui o (%s) estamos a juntar os domínios dentro de parênteses separados por ;
         #domainspar = '(%s)' % domains # e depois podemos tirar esta parte
         values = [op['name'],op['language'],domains,op['hourFinish'],str(op['minutesDone'])] # os minutesDone têm de ser string senão ele não consegue fazer join
