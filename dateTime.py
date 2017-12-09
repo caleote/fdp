@@ -59,6 +59,29 @@ def max_time(time1, time2):
             max = '%02d:%02d' % (hours2, minutes2)
     return max
 
+def min_time(time1, time2):
+    '''
+    #TODO preencher
+    :param time1:
+    :param time2:
+    :return:
+    '''
+    hours1 = get_hours(time1)
+    minutes1 = get_minutes(time1)
+    hours2 = get_hours(time2)
+    minutes2 = get_minutes(time2)
+    if hours1 != hours2:
+        if hours1 < hours2:
+            min = '%02d:%02d' % (hours1, minutes1)
+        else:
+            min = '%02d:%02d' % (hours2, minutes2)
+    else:
+        if minutes1 < minutes2:
+            min = '%02d:%02d' % (hours1, minutes1)
+        else:
+            min = '%02d:%02d' % (hours2, minutes2)
+    return min
+
 def setTime (minutes):
     """
     Sets a time format (string) HH:MM for a time in minutes.

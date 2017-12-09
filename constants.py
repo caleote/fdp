@@ -7,28 +7,22 @@
 
 # Constants pertaining to the file headers
 HEADER_TOTAL_LINES = 7
-
+DELTA_TIME = 5 #gab between actualizations
 
 # Indexes pertaining the request tuple
-req_name = 0
-req_language = 1
-req_domain = 2
-req_service = 3
-req_duration = 4
-
+REQ_INDEX_NAME = 0
+REQ_INDEX_LANGUAGE = 1
+REQ_INDEX_DOMAIN = 2
+REQ_INDEX_SERVICE = 3
+REQ_INDEX_DURATION = 4
 
 # Indexes pertaining the operator collection
-op_name = 0
-op_language = 1
-op_domains = 2
-op_hourFinish = 3
-op_minutesDone = 4
+OP_INDEX_NAME = 0
+OP_INDEX_LANGUAGE = 1
+OP_INDEX_DOMAINS = 2
+OP_INDEX_HOURFINISH = 3
+OP_INDEX_MINUTESDONE = 4
 
-
-# Example Filenames
-REQ_FILENAME = 'examples/example3/requests16h55.txt'
-OP_FILENAME = 'examples/example3/operators16h55.txt'
-OUT_OP_FILENAME = 'operators17h00.txt'
-time_out = 'timetable17h00.txt'
-
-
+ASSIGNMENTS_FILE_PREFIX = 'timetable'
+OPERATORS_FILE_PREFIX = 'operators'
+FILE_EXTENSION = '.txt'

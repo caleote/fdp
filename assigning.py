@@ -18,6 +18,11 @@ def isPremium(request): #Catarina
     return request['service'] == 'premium'
 
 def reqTupleToDict(req):
+    '''
+    #TODO preencher
+    :param req:
+    :return:
+    '''
     return {'name':req[0],
          'language':req[1],
          'domain':req[2],
@@ -26,6 +31,11 @@ def reqTupleToDict(req):
          }
 
 def opTupleToDict(op):
+    '''
+    #TODO preencher
+    :param op:
+    :return:
+    '''
     return {'name':op[0],
         'language':op[1],
         'domains':op[2],
@@ -44,14 +54,13 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
     Ensures: a list of assignments of operators to requests, according to the conditions indicated
     in the general specification (omitted here for the sake of readability).
     """
-    oplist = read_operators_file(operators)
     opdict = []
-    for op in oplist:
+    for op in operators:
+
         opdict.append(opTupleToDict(op))
-    reqlist = read_requests_file(requests)
     premium = []
     fremium = []
-    for req in reqlist:
+    for req in requests:
         reqdict = reqTupleToDict(req)
         if isPremium(reqdict):
             premium.append(reqdict)
@@ -66,12 +75,10 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
             op['minutesDone'] = int(op['minutesDone']) + req['duration']
             assignment = {'operator': op['name'], 'client': req['name'], 'time': start_time} #porque é que no assignment queremos o start-time? não devia de ser o finishHour actualizado?
             op['hourFinish'] = add_minutes(start_time, req['duration']) #aqui estava add_minutes(current_time, req['duration'])
-            #print('hourFinish2:', op['name'], ':', op['hourFinish'])
-            #print('minutesDone2:', op['name'], ':', op['minutesDone'])
         else:
             assignment = {'operator': 'not-assigned', 'client': req['name'], 'time': current_time}
         assignments.append(assignment)
-    return assignments
+    return assignments, opdict
 
 def findMatchingOperator(operators, duration, language, domain, time): # Martim
     '''
@@ -86,23 +93,8 @@ def findMatchingOperator(operators, duration, language, domain, time): # Martim
     omin = None
     for op in operators:
         if op['language'] == language and domain in op['domains'] and int(op['minutesDone']) + duration <= 240:
-            #print('hourFinish:', op['name'], ':', op['hourFinish'])
-            #print('minutesDone:', op['name'], ':', op['minutesDone'])
             if omin == None or op['hourFinish'] < omin['hourFinish'] or op['hourFinish'] == omin['hourFinish'] and op['minutesDone'] > omin['minutesDone'] or op['minutesDone'] == omin['minutesDone'] and op['name'] < omin['name']:
-                # tive de meter op['minutesDone'] > omin['minutesDone'] -- porque o que queremos testar é se os minutesDone da Zenka são maiores dos que os da Romana (neste exemplo)..
-                #print('hourFinish1:', op['name'], ':', op['hourFinish'])
-                #print('minutesDone1:', op['name'], ':', op['minutesDone'])
                 omin = op
     return omin
 
-ass = assign_tasks('examples/example3/operators16h55.txt','examples/example3/requests16h55.txt', '17:00')
-print ('ass:', ass)
-
-def headername(file_name): #Catarina
-    in_file = open(file_name, 'r')
-    lines = in_file.readlines()
-    time = lines[3]
-    typeoffile = (lines[6])[:-2]
-    in_file.close()
-    return time, typeoffile
 

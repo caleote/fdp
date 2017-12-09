@@ -16,15 +16,14 @@ def write_operators_file(operators, header, file_name): # Martim
     """
     out_file = open(file_name, 'w')
     for line in header:
-        out_file.write(line) # writes one line at a time
+        out_file.write(line)
     out_file.write('\n')
-    operatorsorded = sorted(operators, key=lambda k: k['hourFinish']) #aqui não sei ordenar de acordo com a hora e com a ordem alfabética, só consigo 1 de cada vez
+    operatorsorded = sorted(operators, key=lambda k: (k['hourFinish'], k['name']))
     for op in operatorsorded:
-        domains = '(%s)' %('; '.join(op['domains'])) #ao pormos logo aqui o (%s) estamos a juntar os domínios dentro de parênteses separados por ;
-        #domainspar = '(%s)' % domains # e depois podemos tirar esta parte
-        values = [op['name'],op['language'],domains,op['hourFinish'],str(op['minutesDone'])] # os minutesDone têm de ser string senão ele não consegue fazer join
-        line = ', '.join(values) # junta os atributos separados por , numa só linha
-        out_file.write('%s\n' % line) # escreve a linha no ficheiro com ENTER no fim
+        domains = '(%s)' %('; '.join(op['domains']))
+        values = [op['name'],op['language'],domains,op['hourFinish'],str(op['minutesDone'])]
+        line = ', '.join(values)
+        out_file.write('%s\n' % line)
     out_file.close()
 
 def write_assignments_file(assignments, header, file_name): # Catarina
@@ -39,18 +38,11 @@ def write_assignments_file(assignments, header, file_name): # Catarina
     for line in header:
         out_file.write(line)
     out_file.write('\n')
-    assignmentsorded = sorted(assignments, key=lambda k: k['time'])
+    assignmentsorded = sorted(assignments, key=lambda k: (k['time'], k['client']))
     for assign in assignmentsorded:
         values = [assign['time'], assign['client'], assign['operator']]
         line = ','.join(values)
         out_file.write('%s\n' % line)
-
-
-        
     out_file.close()
 
-header1 = ['Operators:']
-header2 = ['Assignments:']
-ass, operatorsdic = assign_tasks('operators16h55.txt', 'requests16h55.txt', '17:00')
-write_operators_file(operatorsdic, header1, 'operators17h00.txt')
-write_assignments_file(ass, header2, 'timetable17h00.txt')
+

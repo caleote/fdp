@@ -45,3 +45,13 @@ def read_requests_file(file_name):
     in_file.close()
 
     return requests
+
+def readHeader(file_name): #Catarina
+    in_file = open(file_name, 'r')
+    lines = in_file.readlines()
+    day = lines[1]
+    time = lines[3][0:5]
+    company = lines[5]
+    typeoffile = (lines[6])[:-2]
+    in_file.close()
+    return day, time, company, typeoffile
