@@ -5,10 +5,11 @@
 
 import constants
 
-def read_operators_file(file_name):  # Martim
+def read_operators_file(file_name):
     """
     Read a file with operators into a collection.
-    Requires: file_name, str with the name of a text file with a list of operators.
+    Requires:
+    - file_name, str with the name of a text file with a list of operators.
     Ensures: list, with the operators in the file; each operator is a tuple with the
     various elements, in the order provided in the file.
     """
@@ -28,7 +29,8 @@ def read_operators_file(file_name):  # Martim
 def read_requests_file(file_name):
     """
     Read a file with requests into a collection.
-    Requires: file_name, str with the name of a text file with a list of requests.
+    Requires:
+    - file_name, str with the name of a text file with a list of requests.
     Ensures: list, with the requests in the file; each request is a tuple with the
     various element concerning that request, in the order provided in the file.
     """
@@ -45,7 +47,13 @@ def read_requests_file(file_name):
 
     return requests
 
-def readHeader(file_name): #Catarina
+def readHeader(file_name):
+    '''
+    Read a file and define the header in day, time, company and typeFile
+    Requires:
+    - file_name, str with the name of a text file with a list of attributes
+    Ensures: strings with the day, time, company and type of file cointained in the Header
+    '''
     in_file = open(file_name, 'r')
     lines = in_file.readlines()
     day = lines[1]
@@ -56,12 +64,24 @@ def readHeader(file_name): #Catarina
     return day, time, company, typeFile
 
 def readFileNameReq(file_name):
+    '''
+    Read the name of the file of requests and define the minutes, hours and type
+    Requires:
+    - file_name, str with the name of a text file with a list of attributes
+    Ensures: strings with the minutes, hours and type cointained in the name of the file
+    '''
     minutes = file_name[-6:-4]
     hours = file_name[-9:-7]
     type = file_name[-17:-9]
     return minutes, hours, type
 
 def readFileNameOp(file_name):
+    '''
+    Read the name of the file of operators and define the minutes, hours and type
+    Requires:
+    - file_name, str with the name of a text file with a list of attributes
+    Ensures: strings with the minutes, hours and type cointained in the name of the file
+    '''
     minutes = file_name[-6:-4]
     hours = file_name[-9:-7]
     type = file_name[-18:-9]

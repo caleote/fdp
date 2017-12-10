@@ -5,13 +5,13 @@
 
 from assigning import *
 
-def write_operators_file(operators, header, file_name): # Martim
+def write_operators_file(operators, header, file_name):
     """
     Write a file from a collection of operators.
     Requires: operators, the list of operators
     Requires: header, the first 7 lines of the file
     Requires: file_name, str with the name of a text file to write a list of operators.
-    Ensures: the file is written on the file system
+    Ensures: the file with the operators is written on the file system
     """
     out_file = open(file_name, 'w')
     for line in header:
@@ -25,13 +25,13 @@ def write_operators_file(operators, header, file_name): # Martim
         out_file.write('%s\n' % line)
     out_file.close()
 
-def write_assignments_file(assignments, header, file_name): # Catarina
+def write_assignments_file(assignments, header, file_name):
     """
     Write a file from a collection of assignments.
     Requires: assignments, the list of assignments
-    Requires: header, the first 7 lines of the file # porquê as 7 primeiras linhas?
+    Requires: header, the first 7 lines of the file
     Requires: file_name, str with the name of a text file to write a list of assignments.
-    Ensures: the file is written on the file system
+    Ensures: the file with the assignments is written on the file system
     """
     out_file = open (file_name, 'w')
     for line in header:

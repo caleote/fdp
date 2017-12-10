@@ -6,21 +6,23 @@
 def get_hours(hm):
     """
     Get the number of hours from a HH:MM time representation.
-    Requires: hm str with a time represented as HH:MM.
+    Requires:
+    - hm str with a time represented as HH:MM.
     Ensures: int with the number of hours.
     """
     return int(hm.split(':')[0])
 
-def get_minutes(hm): #Catarina
+def get_minutes(hm):
     """
     Get the number of minutes from a HH:MM time representation.
-    Requires: hm str with a time represented as HH:MM.
+    Requires:
+    - hm str with a time represented as HH:MM.
     Ensures: int with the number of minutes.
     """
     return int(hm.split(':')[1])
 
 
-def add_minutes(hm, incr): #Catarina e Martim
+def add_minutes(hm, incr):
     """
     Increment the given time by the given amount of minutes.
     Requires:
@@ -58,27 +60,5 @@ def max_time(time1, time2):
             max = '%02d:%02d' % (hours2, minutes2)
     return max
 
-def min_time(time1, time2):
-    '''
-    #TODO preencher
-    :param time1:
-    :param time2:
-    :return:
-    '''
-    hours1 = get_hours(time1)
-    minutes1 = get_minutes(time1)
-    hours2 = get_hours(time2)
-    minutes2 = get_minutes(time2)
-    if hours1 != hours2:
-        if hours1 < hours2:
-            min = '%02d:%02d' % (hours1, minutes1)
-        else:
-            min = '%02d:%02d' % (hours2, minutes2)
-    else:
-        if minutes1 < minutes2:
-            min = '%02d:%02d' % (hours1, minutes1)
-        else:
-            min = '%02d:%02d' % (hours2, minutes2)
-    return min
 
 
