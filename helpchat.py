@@ -8,28 +8,24 @@ import constants
 from filesReading import *
 from filesWriting import *
 
-def main(op_in, req_in): # Martim
+def main(op_in, req_in):
     '''
-    this is the main funtions, it read the two input files with the operators and requestes,
-    produces the output files for the timetable and update yhe operators data
-    :param op_in: the filename for the input operators data
-    :param req_in: the filename for the input requests data
-    :return: nothing
+    This is the main function, that reads the two input files (the operators and requests)
+    and produces the output files (the timetable and the updated operators)
     Requires:
-        - op_in file contains the operators data sorted by available time and name
-        ......  TODO completar .......
-    Ensures:
-        - The time_out file contains the assignments for the requests in the req_in file
-        - The op_out file contain the operators data updted with the request assignment of file time_out
+    - op_in, the filename for the input operators data
+    - req_in, the filename for the input requests data
+    Ensures: that the output files are written with the specifications
+    (omitted here for the sake of readability)
     '''
 
+    # Exceptions:
     operators = read_operators_file(op_in)
     requests = read_requests_file(req_in)
     oday, otime, ocompany, otype = readHeader(op_in)
     rday, rtime, rcompany, rtype = readHeader(req_in)
     op_in_min, op_in_hour, op_in_type = readFileNameOp(op_in)
     req_in_min, req_in_hour, req_in_type = readFileNameReq(req_in)
-
     if otype.lower() != op_in_type or otime != op_in_hour+':'+op_in_min:
         raise Exception ('Error in input file: inconsistency between name and header in file ' + op_in)
     if rtype.lower() != req_in_type or rtime != req_in_hour+':'+req_in_min:
@@ -39,7 +35,22 @@ def main(op_in, req_in): # Martim
     else:
         current_time = otime
 
-
+    '''
+    try:
+        if otype.lower() == op_in_type or otime == op_in_hour + ':' + op_in_min:
+            current_time = otime
+    except IOError:
+        raise Exception ('Error in input file: inconsistency between name and header in file ' + op_in)
+    try:
+        if rtype.lower() == req_in_type or rtime == req_in_hour + ':' + req_in_min:
+            current_time = otime
+    except IOError:
+        raise Exception ('Error in input file: inconsistency between name and header in file ' + req_in)
+    try:
+        if oday == rday or otime == rtime or ocompany == rcompany:
+            current_time = otime
+    except IOError:
+        raise Exception ('Error in input file: inconsistency between files ' + op_in + ' and ' + req_in)'''
 
     # Assining requests to operators
     assignments, operators = assigning.assign_tasks(operators, requests, current_time)
@@ -53,7 +64,6 @@ def main(op_in, req_in): # Martim
     op_out = constants.OPERATORS_FILE_PREFIX + '%02dh%02d' % (get_hours(nextTime), get_minutes(nextTime)) + constants.FILE_EXTENSION
     write_assignments_file(assignments, header + ttHeader, time_out)
     write_operators_file(operators, header + opHeader, op_out)
-
 
 #Testing all files
 main('examples/example1/operators14h55.txt','examples/example1/requests14h55.txt')

@@ -7,7 +7,7 @@ from dateTime import *
 from filesReading import *
 from constants import *
 
-def isPremium(request): #Catarina
+def isPremium(request):
     """
     Returns the information if the service of the request is premium or not
     Requires:
@@ -18,9 +18,10 @@ def isPremium(request): #Catarina
 
 def reqTupleToDict(req):
     '''
-    #TODO preencher
-    :param req:
-    :return:
+    Returns a dictionary with the requests keys
+    Requires:
+    - req, a tuple with one request
+    Ensures: a dictionary with the values of the tuple inserted
     '''
     return {'name':req[0],
          'language':req[1],
@@ -31,9 +32,10 @@ def reqTupleToDict(req):
 
 def opTupleToDict(op):
     '''
-    #TODO preencher
-    :param op:
-    :return:
+    Returns a dictionary with the operators keys
+    Requires:
+    - op, a tuple with one operator
+    Ensures: a dictionary with the values of the tuple inserted
     '''
     return {'name':op[0],
         'language':op[1],
@@ -42,7 +44,7 @@ def opTupleToDict(op):
         'minutesDone':op[4]
          }
 
-def assign_tasks(operators, requests, current_time): #Catarina Martim
+def assign_tasks(operators, requests, current_time):
     """
     Assign operators to pending requests.
     Requires:
@@ -51,11 +53,10 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
     - requests, a list of requests, structured as the output of filesReading.read_requests_file;
     - current_time, str with the HH:MM representation of the time for this update step.
     Ensures: a list of assignments of operators to requests, according to the conditions indicated
-    in the general specification (omitted here for the sake of readability).
+    in the general specification (omitted here for the sake of readability) and a list of operators.
     """
     opdict = []
     for op in operators:
-
         opdict.append(opTupleToDict(op))
     premium = []
     fremium = []
@@ -79,21 +80,19 @@ def assign_tasks(operators, requests, current_time): #Catarina Martim
         assignments.append(assignment)
     return assignments, opdict
 
-def findMatchingOperator(operators, duration, language, domain): # Martim
+def findMatchingOperator(operators, duration, language, domain):
     '''
-    TODO preencer
-    :param operators:
-    :param language:
-    :param domain:
-    :param time:
-    :return:
+    Finds the matching operator to a given request
+    Requires:
+    - operators, a dictionary of operators
+    - duration, the duration of a given request
+    - language, the language of a given request
+    - domain, the domain of a given request
+    Ensures: an operator that is the match for the given request
     '''
-
     omin = None
     for op in operators:
         if op['language'] == language and domain in op['domains'] and int(op['minutesDone']) + duration <= 240:
             if omin == None or op['hourFinish'] < omin['hourFinish'] or op['hourFinish'] == omin['hourFinish'] and op['minutesDone'] > omin['minutesDone'] or op['minutesDone'] == omin['minutesDone'] and op['name'] < omin['name']:
                 omin = op
     return omin
-
-
