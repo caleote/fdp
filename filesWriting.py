@@ -13,6 +13,7 @@ def write_operators_file(operators, header, file_name):
     Requires: file_name, str with the name of a text file to write a list of operators.
     Ensures: the file with the operators is written on the file system
     """
+    #print(file_name)
     out_file = open(file_name, 'w')
     for line in header:
         out_file.write(line)
@@ -33,6 +34,7 @@ def write_assignments_file(assignments, header, file_name):
     Requires: file_name, str with the name of a text file to write a list of assignments.
     Ensures: the file with the assignments is written on the file system
     """
+    #print(file_name)
     out_file = open (file_name, 'w')
     for line in header:
         out_file.write(line)
@@ -40,7 +42,7 @@ def write_assignments_file(assignments, header, file_name):
     assignmentsorded = sorted(assignments, key=lambda k: (k['time'], k['client']))
     for assign in assignmentsorded:
         values = [assign['time'], assign['client'], assign['operator']]
-        line = ','.join(values)
+        line = ', '.join(values)
         out_file.write('%s\n' % line)
     out_file.close()
 

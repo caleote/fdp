@@ -7,6 +7,7 @@ import assigning
 import constants
 from filesReading import *
 from filesWriting import *
+import sys
 
 def main(op_in, req_in):
     '''
@@ -18,6 +19,8 @@ def main(op_in, req_in):
     Ensures: that the output files are written with the specifications
     (omitted here for the sake of readability)
     '''
+
+
 
     # Exceptions:
     operators = read_operators_file(op_in)
@@ -66,19 +69,26 @@ def main(op_in, req_in):
     write_operators_file(operators, header + opHeader, op_out)
 
 #Testing all files
-main('examples/example1/operators14h55.txt','examples/example1/requests14h55.txt')
-main('examples/example2/operators11h05.txt','examples/example2/requests11h05.txt')
-main('examples/example3/operators16h55.txt','examples/example3/requests16h55.txt')
-main('examples/example4/operators14h55.txt','examples/example4/requests14h55.txt')
-main('examples/example5/operators14h55.txt','examples/example5/requests11h05.txt')
+# main('examples/example1/operators14h55.txt','examples/example1/requests14h55.txt')
+# main('examples/example2/operators11h05.txt','examples/example2/requests11h05.txt')
+# main('examples/example3/operators16h55.txt','examples/example3/requests16h55.txt')
+# main('examples/example4/operators14h55.txt','examples/example4/requests14h55.txt')
+# main('examples/example5/operators14h55.txt','examples/example5/requests11h05.txt')
 
 
-#fazer um if com sys.argv length que tem de ser 3 senão dá erro
-'''
 try:
-
+  if len(sys.argv) == 3:
     main(sys.argv[1],sys.argv[2])
+  else:
+      print("Usage: python3 "+sys.argv[0]+ " operatorsfile requestsfile")
 except Exception as e:
-    print(e.args[0])'''
+    print(e.args[0])
 
 #https://docs.python.org/2/tutorial/errors.html
+
+
+#cd "/Users/martim/Desktop/1 semestre FCUL/Fundamentos de Programação/fdp"
+#python3 helpchat.py operators14h55.txt requests14h55.txt
+
+
+# exemplo 1 passou nos testes com uma alteração feita neste ficheiro ',' para ', '

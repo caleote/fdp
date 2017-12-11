@@ -27,7 +27,7 @@ def reqTupleToDict(req):
          'language':req[1],
          'domain':req[2],
          'service':req[3],
-         'duration':req[4]
+         'duration':int(req[4])
          }
 
 def opTupleToDict(op):
@@ -41,7 +41,7 @@ def opTupleToDict(op):
         'language':op[1],
         'domains':op[2],
         'hourFinish':op[3],
-        'minutesDone':op[4]
+        'minutesDone':int(op[4])
          }
 
 def assign_tasks(operators, requests, current_time):
@@ -72,12 +72,13 @@ def assign_tasks(operators, requests, current_time):
         op = findMatchingOperator(opdict, req['duration'], req['language'], req['domain'])
         if op != None:
             start_time = max_time(current_time, op['hourFinish'])
-            op['minutesDone'] = int(op['minutesDone']) + req['duration']
+            op['minutesDone'] = op['minutesDone'] + req['duration']
             assignment = {'operator': op['name'], 'client': req['name'], 'time': start_time}
             op['hourFinish'] = add_minutes(start_time, req['duration'])
         else:
             assignment = {'operator': 'not-assigned', 'client': req['name'], 'time': current_time}
         assignments.append(assignment)
+        #print(assignment)
     return assignments, opdict
 
 def findMatchingOperator(operators, duration, language, domain):
@@ -92,7 +93,11 @@ def findMatchingOperator(operators, duration, language, domain):
     '''
     omin = None
     for op in operators:
-        if op['language'] == language and domain in op['domains'] and int(op['minutesDone']) + duration <= 240:
-            if omin == None or op['hourFinish'] < omin['hourFinish'] or op['hourFinish'] == omin['hourFinish'] and op['minutesDone'] > omin['minutesDone'] or op['minutesDone'] == omin['minutesDone'] and op['name'] < omin['name']:
+        if op['language'] == language and domain in op['domains'] and op['minutesDone'] + duration <= 240:
+            if (omin == None or
+                op['hourFinish'] < omin['hourFinish'] or
+                op['hourFinish'] == omin['hourFinish'] and
+                op['minutesDone'] < omin['minutesDone'] or
+                op['minutesDone'] == omin['minutesDone'] and op['name'] < omin['name']):
                 omin = op
     return omin
