@@ -21,7 +21,6 @@ def main(op_in, req_in):
     '''
 
 
-
     # Exceptions:
     operators = read_operators_file(op_in)
     requests = read_requests_file(req_in)
@@ -29,14 +28,36 @@ def main(op_in, req_in):
     rday, rtime, rcompany, rtype = readHeader(req_in)
     op_in_min, op_in_hour, op_in_type = readFileNameOp(op_in)
     req_in_min, req_in_hour, req_in_type = readFileNameReq(req_in)
+
+    '''  
+    try:
+        assert(otype.lower() == op_in_type and otime == op_in_hour+':'+op_in_min)
+    except AssertionError:
+        raise IOError('Error in input file: inconsistency between name and header in file ' + op_in)
+
+    try:
+        assert(rtype.lower() == req_in_type and rtime == req_in_hour+':'+req_in_min)
+    except AssertionError:
+        raise IOError('Error in input file: inconsistency between name and header in file ' + req_in)
+
+    try:
+        assert(oday == rday and otime == rtime and ocompany == rcompany)
+    except AssertionError:
+        raise IOError ('Error in input file: inconsistency between files ' + op_in + ' and ' + req_in)
+
+    current_time = otime'''
+
+
+
     if otype.lower() != op_in_type or otime != op_in_hour+':'+op_in_min:
-        raise Exception ('Error in input file: inconsistency between name and header in file ' + op_in)
+        raise IOError ('Error in input file: inconsistency between name and header in file ' + op_in)
     if rtype.lower() != req_in_type or rtime != req_in_hour+':'+req_in_min:
-        raise Exception ('Error in input file: inconsistency between name and header in file ' + req_in)
+        raise IOError ('Error in input file: inconsistency between name and header in file ' + req_in)
     if oday != rday or otime != rtime or ocompany != rcompany:
-        raise Exception ('Error in input file: inconsistency between files ' + op_in + ' and ' + req_in)
+        raise IOError ('Error in input file: inconsistency between files ' + op_in + ' and ' + req_in)
     else:
         current_time = otime
+
 
     '''
     try:
@@ -69,22 +90,25 @@ def main(op_in, req_in):
     write_operators_file(operators, header + opHeader, op_out)
 
 #Testing all files
-# main('examples/example1/operators14h55.txt','examples/example1/requests14h55.txt')
-# main('examples/example2/operators11h05.txt','examples/example2/requests11h05.txt')
-# main('examples/example3/operators16h55.txt','examples/example3/requests16h55.txt')
-# main('examples/example4/operators14h55.txt','examples/example4/requests14h55.txt')
-# main('examples/example5/operators14h55.txt','examples/example5/requests11h05.txt')
-
+# try:
+#     main('examples/example1/operators14h55.txt','examples/example1/requests14h55.txt')
+#     main('examples/example2/operators11h05.txt','examples/example2/requests11h05.txt')
+#     main('examples/example3/operators16h55.txt','examples/example3/requests16h55.txt')
+#     main('examples/example4/operators14h55.txt','examples/example4/requests14h55.txt')
+#     main('examples/example5/operators14h55.txt','examples/example5/requests11h05.txt')
+# except IOError as e :
+#     print (e.args[0])
 
 try:
   if len(sys.argv) == 3:
     main(sys.argv[1],sys.argv[2])
   else:
       print("Usage: python3 "+sys.argv[0]+ " operatorsfile requestsfile")
-except Exception as e:
+except IOError as e:
     print(e.args[0])
 
 #https://docs.python.org/2/tutorial/errors.html
+
 
 
 #cd "/Users/martim/Desktop/1 semestre FCUL/Fundamentos de Programação/fdp"
